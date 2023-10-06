@@ -1,0 +1,12 @@
+.bookContainer{
+    height: 560px;
+    max-height: 560px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.imageContainer{
+    height: 270px;
+    width: 270px;
+    box-shadow: 0px 5px 15px 5px rgba(10, 53, 67, 0.1);
+}

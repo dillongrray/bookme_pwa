@@ -1,0 +1,27 @@
+.queueUI {
+    position: fixed;
+    width: 200px;
+    height: 100px;
+    right: 0px; /* You can adjust the value as per your requirement */
+    bottom: 10px; /* You can adjust the value as per your requirement */
+    z-index: 1000; /* to ensure it stays above other elements */
+}
+
+.queueShowButton{
+    height: 35px;
+    width: 100px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    background-color: #1fa5cf;
+    color: white;
+    font-size: 14px;
+
+}
+
+.queueShowButton:hover{
+    background-color: #1b94b9;
+}
+
+.queueShowButton:active{
+    background-color: #157390;
+}

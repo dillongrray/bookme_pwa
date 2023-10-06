@@ -1,0 +1,37 @@
+.detailsContainer{
+    height:570px;
+}
+
+.imageContainer{
+    box-shadow: 0px 5px 15px 5px rgba(10, 53, 67, 0.1);
+}
+
+.descriptionContainer{
+    height: 500px;
+    max-height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.returnBook{
+    height: 50px;
+    width: 150px;
+    border-radius: 12px;
+    background-color: #1fa5cf;
+    color: white;
+    font-size: 18px;
+    box-shadow: 0px 4px 8px 0px rgba(10, 53, 67, 0.2);
+
+}
+
+.returnBook:hover{
+    background-color: #1b94b9;
+}
+
+.returnBook:active{
+    background-color: #157390;
+}
+
+.returnBook:disabled{
+    background-color: gray;
+}

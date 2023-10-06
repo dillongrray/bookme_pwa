@@ -1,0 +1,25 @@
+.input{
+    border: 1px solid gray;
+}
+
+.returnBook{
+    height: 50px;
+    width: 150px;
+    border-radius: 12px;
+    background-color: #33c99c;
+    color: white;
+    font-size: 18px;
+
+}
+
+.returnBook:hover{
+    background-color: #2fb88f;
+}
+
+.returnBook:active{
+    background-color: #279977;
+}
+
+.returnBook:disabled{
+    background-color: gray;
+}

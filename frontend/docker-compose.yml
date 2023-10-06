@@ -1,0 +1,20 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - HOMEPAGE_URL=https://jedi.mydns.gov.tt/pwa/
+        - REACT_APP_BACKEND_URL=https://jedi.mydns.gov.tt/pwa_testing/public/api
+        - REACT_APP_SUBPATH=/pwa
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+    environment:
+      - REACT_APP_BACKEND_URL=https://jedi.mydns.gov.tt/pwa_testing/public/api
+
+networks:
+  app-network:
+    driver: bridge

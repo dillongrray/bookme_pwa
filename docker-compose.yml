@@ -1,0 +1,81 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+    networks:
+      - laravel_network
+
+  bookme_db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=bookme
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=rootPassword
+      - MYSQL_ALLOW_EMPTY_PASSWORD=false
+      - MYSQL_RANDOM_ROOT_PASSWORD=false
+    volumes:
+      - bookme_db_data:/var/lib/mysql
+    networks:
+      - laravel_network
+
+  bookme_api:
+    container_name: bookme_api
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    environment:
+      - IMAGE_PATH=http://localhost:8080/backend/storage/
+      - DB_CONNECTION=mysql
+      - DB_HOST=bookme_db
+      - DB_PORT=3306
+      - DB_DATABASE=bookme
+      - DB_USERNAME=user
+      - DB_PASSWORD=password
+      - JWT_SECRET="testing1234!"
+      - JWT_ALGORITHM="HS256"
+      - JWT_ACCESS_TOKEN_LIFETIME=1
+      - JWT_REFRESH_TOKEN_LIFETIME=3
+      - JWT_AUTH_COOKIE="access_token"
+      - JWT_AUTH_COOKIE_REFRESH="refresh_token"
+      - JWT_AUTH_COOKIE_SECURE=true
+      - JWT_AUTH_COOKIE_HTTP_ONLY=true
+      - JWT_AUTH_COOKIE_SAMESITE="lax"
+      - JWT_AUTH_COOKIE_PATH="/"
+      - JWT_AUTH_COOKIE_DOMAIN="localhost"
+    networks:
+      - laravel_network
+    depends_on:
+      - bookme_db
+
+  bookme_frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - HOMEPAGE_URL=http://localhost:8080/pwa
+        - REACT_APP_BACKEND_URL=http://localhost:8080/backend/api
+        - REACT_APP_SUBPATH=/pwa
+        - REACT_APP_BACKEND_PATH=/backend/api
+        - REACT_APP_PROXY_PORT=8080
+        - REACT_APP_PROXY_LOCALHOST=true
+        - REACT_APP_BACKEND_IMAGE_PATH=/backend/storage/
+    ports:
+      - "3000:80"
+    networks:
+      - laravel_network
+      
+
+networks:
+  laravel_network:
+    driver: bridge
+
+volumes:
+  bookme_db_data:
